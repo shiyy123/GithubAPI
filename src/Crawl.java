@@ -11,74 +11,24 @@ import java.util.*;
 
 public class Crawl {
 
-    static void processMessage(final InputStream inputStream, final boolean isDebuggable) {
-        new Thread(() -> {
-            Reader reader = new InputStreamReader(inputStream);
-            BufferedReader br = new BufferedReader(reader);
-            String line;
-            try {
-                while ((line = br.readLine()) != null) {
-                    if (isDebuggable) {
-                        System.out.println(line);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-    private int protectRateLimit() {
-        int remaining = 0;
-        String cmd = "curl https://api.github.com/rate_limit?access_token=406b8b1cdc15f3cb1757cdd7a3a170d3e11c8c0d";
-        try {
-            Process process = Runtime.getRuntime().exec(cmd);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            StringBuilder res = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                res.append(line);
-            }
-            process.waitFor();
-
-            JSONObject rateLimit = new JSONObject(res.toString());
-            remaining = rateLimit.getJSONObject("resources").getJSONObject("search").getInt("remaining");
-//            int reset = rateLimit.getJSONObject("resources").getJSONObject("search").getInt("reset");
-//            Date date = new Date(reset*10);
-//            System.out.println(date);
-        } catch (IOException | InterruptedException | JSONException e) {
-            e.printStackTrace();
-        }
-        return remaining;
-    }
-
+    /**
+     * get the attribute total_count
+     * @param cmd
+     * @return
+     */
     private int getCnt(String cmd) {
-
-        while (protectRateLimit() < 3) {
-            try {
-                Thread.sleep(60000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        Tools.protectRateLimit();
 
         int cnt = 0;
         try {
             Process p = Runtime.getRuntime().exec(cmd);
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            StringBuilder res = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                res.append(line);
-                System.out.println(line);
-            }
+            StringBuilder res = Tools.getProcessOutput(p.getInputStream(), true);
 
             p.waitFor();
             p.destroyForcibly();
 
             JSONObject item = new JSONObject(res.toString());
-//            System.out.println(item.toString());
             cnt = item.getInt("total_count");
         } catch (IOException | InterruptedException | JSONException e) {
             e.printStackTrace();
@@ -86,37 +36,29 @@ public class Crawl {
         return cnt;
     }
 
-    int getRepoCnt(String cmd) {
-        int Cnt = getCnt(cmd);
-        return Cnt;
-    }
+    /**
+     * Get repos info with condition and store in dataStorePath
+     * @param condition request condition
+     * @param dataStorePath data store to
+     */
+    public void getRepos(String condition, String dataStorePath) {
+//        String baseUrl = "curl https://api.github.com/search/repositories?access_token=406b8b1cdc15f3cb1" +
+//                "757cdd7a3a170d3e11c8c0d&q=topic:android-app+language:java+created:>2018-03-01";
+        String baseUrl = "curl https://api.github.com/search/repositories?access_token=" + StaticResource.token +
+                "&q=" + condition;
 
-    // TODO 需要弄明白为什么爬取下来的真实数据比在网站上看到的要少，初步看是自身有重复，首尾相连
-    void get() {
-        String baseUrl = "curl https://api.github.com/search/repositories?access_token=406b8b1cdc15f3cb1" +
-                "757cdd7a3a170d3e11c8c0d&q=topic:android-app+language:java+created:>2018-03-01";
         try {
             int pageSize = 100;
-            int totalNum = getRepoCnt(baseUrl);
+            int totalNum = getCnt(baseUrl);
             System.out.println(totalNum);
-//            System.exit(0);
 
             int pageNum = totalNum / pageSize + (totalNum % pageSize == 0 ? 0 : 1);
             for (int pageCnt = 0; pageCnt < pageNum; pageCnt++) {
                 System.out.println(pageCnt);
                 String cmd = baseUrl + "&sort=stars&order=desc&page=" + pageCnt + "&per_page=" + pageSize;
-                Process p = Runtime.getRuntime().exec(cmd);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                BufferedWriter writer = new BufferedWriter(new FileWriter("/home/cary/Documents/Data/crawl/request3.json", true));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    writer.write(line);
-                    writer.newLine();
-                    writer.flush();
-                }
-                writer.write("onelineend");
-                writer.newLine();
-                writer.close();
+
+                Process p = Runtime.getRuntime().exec(Tools.getCmd(cmd));
+                Tools.readAndWrite(p.getInputStream(), dataStorePath, "onelineend");
 
                 p.waitFor();
             }
@@ -247,24 +189,10 @@ public class Crawl {
                 System.out.println(pageIdx);
                 String cmd = baseUrl + "&page=" + pageIdx + "&per_page=" + pageSize;
 
-                while (protectRateLimit() < 3) {
-                    try {
-                        System.out.println("wait");
-                        Thread.sleep(60000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    while (protectRateLimit() < 3) {
-                        try {
-                            Thread.sleep(60000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+                Tools.protectRateLimit();
 
                 Process p = Runtime.getRuntime().exec(cmd);
-                processMessage(p.getErrorStream(), false);
+                Tools.processMessage(p.getErrorStream(), false);
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String fileName = name.replace('/', '_');
@@ -311,16 +239,6 @@ public class Crawl {
         }
     }
 
-    void standBy() {
-        while (protectRateLimit() < 3) {
-            try {
-                Thread.sleep(600000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     void getCommits() {
 //        String base = "/home/cary/Documents/Data/crawl";
         String base = "/home/cary/ga/";
@@ -330,7 +248,7 @@ public class Crawl {
             for (String name : names) {
                 name = name.substring(0, name.indexOf(",,,"));
 
-                standBy();
+                Tools.protectRateLimit();
 
                 BufferedWriter writer = new BufferedWriter(new FileWriter(base + "/commit/" + name.replace(
                         "/", "_") + ".json", true));
@@ -356,7 +274,7 @@ public class Crawl {
                                 "406b8b1cdc15f3cb1757cdd7a3a170d3e11c8c0d&per_page=100&sha=" + branchSHA + "&page=";
                         cmd += curPage++;
 
-                        standBy();
+                        Tools.protectRateLimit();
 
                         Process process = Runtime.getRuntime().exec(cmd);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -472,7 +390,7 @@ public class Crawl {
         }
         StringBuilder res = new StringBuilder();
         try {
-            standBy();
+            Tools.protectRateLimit();
             Process p = Runtime.getRuntime().exec(cmd);
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line;
@@ -736,11 +654,11 @@ public class Crawl {
         }
     }
 
-    public static void main(String[] args) {
-        Crawl crawl = new Crawl();
-//        crawl.getNeedCommit();
-        crawl.preprocess();
-    }
+//    public static void main(String[] args) {
+//        Crawl crawl = new Crawl();
+////        crawl.getNeedCommit();
+//        crawl.preprocess();
+//    }
 
     class StartEndTime {
         String name;
