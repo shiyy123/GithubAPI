@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GithubAPI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GithubAPI_jar</output-path>
+    <root id="archive" name="GithubAPI.jar">
+      <element id="module-output" name="GithubAPI" />
+      <element id="extracted-dir" path="$USER_HOME$/JAR/org.json.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/JAR/commons-io-2.6/commons-io-2.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/JAR/commons-lang3-3.8.1/commons-lang3-3.8.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
