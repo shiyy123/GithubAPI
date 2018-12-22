@@ -1,4 +1,5 @@
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,17 +14,18 @@ public class Crawl {
 
     /**
      * get the attribute total_count
+     *
      * @param cmd
      * @return
      */
     private int getCnt(String cmd) {
-        Tools.protectRateLimit();
+        Tools.protectRateLimit(false);
 
         int cnt = 0;
         try {
             Process p = Runtime.getRuntime().exec(cmd);
 
-            StringBuilder res = Tools.getProcessOutput(p.getInputStream(), true);
+            StringBuilder res = Tools.getProcessOutput(p.getInputStream(), false);
 
             p.waitFor();
             p.destroyForcibly();
@@ -38,26 +40,31 @@ public class Crawl {
 
     /**
      * Get repos info with condition and store in dataStorePath
-     * @param condition request condition
+     *
+     * @param condition     request condition
      * @param dataStorePath data store to
      */
     public void getRepos(String condition, String dataStorePath) {
-//        String baseUrl = "curl https://api.github.com/search/repositories?access_token=406b8b1cdc15f3cb1" +
-//                "757cdd7a3a170d3e11c8c0d&q=topic:android-app+language:java+created:>2018-03-01";
-        String baseUrl = "curl https://api.github.com/search/repositories?access_token=" + StaticResource.token +
-                "&q=" + condition;
+//        String baseUrl = "curl https://api.github.com/search/repositories?access_token=" + StaticResource.token +"&q=topic:android-app+language:java+created:>2018-03-01";
+
+        String baseUrl = "curl https://api.github.com/search/repositories?access_token=" + StaticResource.token + "&q=" + condition;
+
+        System.out.println(baseUrl);
 
         try {
             int pageSize = 100;
             int totalNum = getCnt(baseUrl);
-            System.out.println(totalNum);
+            System.out.println("totalNum=" + totalNum);
 
             int pageNum = totalNum / pageSize + (totalNum % pageSize == 0 ? 0 : 1);
             for (int pageCnt = 0; pageCnt < pageNum; pageCnt++) {
-                System.out.println(pageCnt);
+                System.out.println("page=" + pageCnt);
                 String cmd = baseUrl + "&sort=stars&order=desc&page=" + pageCnt + "&per_page=" + pageSize;
 
-                Process p = Runtime.getRuntime().exec(Tools.getCmd(cmd));
+                Tools.protectRateLimit(false);
+
+                Process p = Runtime.getRuntime().exec(cmd);
+                Tools.processMessage(p.getErrorStream(), true);
                 Tools.readAndWrite(p.getInputStream(), dataStorePath, "onelineend");
 
                 p.waitFor();
@@ -66,6 +73,59 @@ public class Crawl {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * process the result of method getRepos
+     * output: process_repo.json one line is one repo
+     * @param dataFromPath
+     */
+    public void process4getRepos(String dataFromPath, String dataStorePath) {
+        try {
+//            List<String> lines = FileUtils.readLines(new File(dataStorePath), "utf-8");
+            String data = FileUtils.readFileToString(new File(dataFromPath), "utf-8");
+            String[] items = data.split("onelineend");
+            for (String item : items) {
+                JSONObject jsonObject = new JSONObject(item);
+                JSONArray array = jsonObject.getJSONArray("items");
+                for (int i = 0; i < array.length(); i++) {
+                    FileUtils.writeStringToFile(new File(dataStorePath), array.getJSONObject(i).toString(),"utf-8", true);
+                    FileUtils.write(new File(dataStorePath), "\n", "utf-8", true);
+                }
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Get repo name from process_repo.json
+     * output: repoName.txt
+     * @param dataFromPath
+     */
+    public void getReposNameFromRepoInfo(String dataFromPath, String dataStorePath) {
+        try {
+            List<String> jsons = FileUtils.readLines(new File(dataFromPath), "utf-8");
+            Set<String> nameList = new HashSet<>();
+            for (String json : jsons) {
+                JSONObject item = new JSONObject(json);
+                String name = item.getString("full_name");
+                nameList.add(name);
+            }
+            FileUtils.writeLines(new File(dataStorePath), nameList, "\n");
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void getReleaseInfo(String repo, String dataStorePath) {
+        String baseURL = "curl https://api.github.com/" + repo + "/access_token=" + StaticResource.token;
+        System.out.println(baseURL);
+
+    }
+
 
     void split() {
         List<JSONObject> res = new ArrayList<>();
@@ -189,7 +249,7 @@ public class Crawl {
                 System.out.println(pageIdx);
                 String cmd = baseUrl + "&page=" + pageIdx + "&per_page=" + pageSize;
 
-                Tools.protectRateLimit();
+                Tools.protectRateLimit(false);
 
                 Process p = Runtime.getRuntime().exec(cmd);
                 Tools.processMessage(p.getErrorStream(), false);
@@ -248,7 +308,7 @@ public class Crawl {
             for (String name : names) {
                 name = name.substring(0, name.indexOf(",,,"));
 
-                Tools.protectRateLimit();
+                Tools.protectRateLimit(false);
 
                 BufferedWriter writer = new BufferedWriter(new FileWriter(base + "/commit/" + name.replace(
                         "/", "_") + ".json", true));
@@ -274,7 +334,7 @@ public class Crawl {
                                 "406b8b1cdc15f3cb1757cdd7a3a170d3e11c8c0d&per_page=100&sha=" + branchSHA + "&page=";
                         cmd += curPage++;
 
-                        Tools.protectRateLimit();
+                        Tools.protectRateLimit(false);
 
                         Process process = Runtime.getRuntime().exec(cmd);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -390,7 +450,7 @@ public class Crawl {
         }
         StringBuilder res = new StringBuilder();
         try {
-            Tools.protectRateLimit();
+            Tools.protectRateLimit(false);
             Process p = Runtime.getRuntime().exec(cmd);
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line;
@@ -611,7 +671,7 @@ public class Crawl {
                     Date end = simpleDateFormat.parse(startEndTime.end);
 
 
-                    if(startEndTime.name.equals(name)) {
+                    if (startEndTime.name.equals(name)) {
                         flag = true;
 
                         StringBuilder sb = new StringBuilder();
@@ -627,14 +687,14 @@ public class Crawl {
                         for (int k = 0; k < branches.size(); k++) {
                             String[] ss = branches.get(k).split("onepageend");
                             for (int l = 0; l < ss.length; l++) {
-                                if(ss[l].length() == 0){
+                                if (ss[l].length() == 0) {
                                     continue;
                                 }
                                 JSONArray tmp = new JSONArray(ss[l]);
                                 for (int m = 0; m < tmp.length(); m++) {
                                     JSONObject jsonObject = tmp.getJSONObject(m);
                                     Date commitTime = simpleDateFormat.parse(jsonObject.getJSONObject("commit").getJSONObject("committer").getString("date"));
-                                    if(commitTime.after(start) && commitTime.before(end)) {
+                                    if (commitTime.after(start) && commitTime.before(end)) {
                                         writer.write(jsonObject.toString());
                                         writer.flush();
                                     }
@@ -645,7 +705,7 @@ public class Crawl {
                 }
                 writer.close();
 
-                if(!flag) {
+                if (!flag) {
                     FileUtils.copyFile(file, new File(base + "/time_commit/" + file.getName()));
                 }
             }

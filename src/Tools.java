@@ -7,6 +7,7 @@ public class Tools {
 
     /**
      * process the output info of process
+     *
      * @param inputStream
      * @param isDebuggable
      */
@@ -29,15 +30,16 @@ public class Tools {
 
     /**
      * get remaining request time
+     *
      * @return
      */
-    public static int getRemainRequestTime() {
+    public static int getRemainRequestTime(boolean debuggable) {
         int remaining = 0;
         String cmd = "curl -H \"Authorization: token " + StaticResource.token + "\" " + "https://api.github.com/rate_limit";
 
         try {
             Process process = Runtime.getRuntime().exec(getCmd(cmd));
-            StringBuilder res = getProcessOutput(process.getInputStream(), true);
+            StringBuilder res = getProcessOutput(process.getInputStream(), debuggable);
             process.waitFor();
 
             JSONObject rateLimit = new JSONObject(res.toString());
@@ -54,8 +56,9 @@ public class Tools {
 
     /**
      * Get output from p(Process).getInputStream()
+     *
      * @param inputStream input
-     * @param debuggable print in console or not
+     * @param debuggable  print in console or not
      * @return output
      */
     public static StringBuilder getProcessOutput(InputStream inputStream, boolean debuggable) {
@@ -69,7 +72,7 @@ public class Tools {
                     System.out.println(line);
                 }
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return res;
@@ -78,8 +81,8 @@ public class Tools {
     /**
      * prevent exceed the request time and sleep 60 seconds
      */
-    public static void protectRateLimit() {
-        while (getRemainRequestTime() < 3) {
+    public static void protectRateLimit(boolean debuggable) {
+        while (getRemainRequestTime(debuggable) < 3) {
             try {
                 Thread.sleep(60000);
             } catch (InterruptedException e) {
@@ -90,6 +93,7 @@ public class Tools {
 
     /**
      * read from process output and write in specific file
+     *
      * @param inputStream
      * @param dataStorePath
      * @param split
@@ -109,6 +113,14 @@ public class Tools {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static String toTime(int time) {
+        if (time >= 1 && time <= 9) {
+            return "0" + time;
+        } else {
+            return "" + time;
         }
     }
 }
