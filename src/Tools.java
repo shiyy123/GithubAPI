@@ -49,6 +49,29 @@ public class Tools {
         }
         return remaining;
     }
+    
+    /**
+     * get specific token remain
+     * @param debuggable
+     * @param token
+     * @return
+     */
+    public static int getRemainRequestTime(boolean debuggable, String token) {
+        int remaining = 0;
+        String cmd = "curl -H \"Authorization: token " + token + "\" " + "https://api.github.com/rate_limit";
+
+        try {
+            Process process = Runtime.getRuntime().exec(getCmd(cmd));
+            StringBuilder res = getProcessOutput(process.getInputStream(), debuggable);
+            process.waitFor();
+
+            JSONObject rateLimit = new JSONObject(res.toString());
+            remaining = rateLimit.getJSONObject("resources").getJSONObject("search").getInt("remaining");
+        } catch (IOException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+        }
+        return remaining;
+    }
 
     public static String[] getCmd(String cmd) {
         return new String[]{"/bin/sh", "-c", cmd};
@@ -83,6 +106,21 @@ public class Tools {
      */
     public static void protectRateLimit(boolean debuggable) {
         while (getRemainRequestTime(debuggable) < 3) {
+            try {
+                Thread.sleep(60000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * protect specific token
+     * @param debuggable
+     * @param token
+     */
+    public static void protectRateLimit(boolean debuggable, String token) {
+        while (getRemainRequestTime(debuggable, token) < 3) {
             try {
                 Thread.sleep(60000);
             } catch (InterruptedException e) {

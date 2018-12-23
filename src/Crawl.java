@@ -3,12 +3,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.omg.SendingContext.RunTime;
 
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Crawl {
 
@@ -78,6 +81,7 @@ public class Crawl {
     /**
      * process the result of method getRepos
      * output: process_repo.json one line is one repo
+     *
      * @param dataFromPath
      */
     public void process4getRepos(String dataFromPath, String dataStorePath) {
@@ -89,7 +93,7 @@ public class Crawl {
                 JSONObject jsonObject = new JSONObject(item);
                 JSONArray array = jsonObject.getJSONArray("items");
                 for (int i = 0; i < array.length(); i++) {
-                    FileUtils.writeStringToFile(new File(dataStorePath), array.getJSONObject(i).toString(),"utf-8", true);
+                    FileUtils.writeStringToFile(new File(dataStorePath), array.getJSONObject(i).toString(), "utf-8", true);
                     FileUtils.write(new File(dataStorePath), "\n", "utf-8", true);
                 }
             }
@@ -101,6 +105,7 @@ public class Crawl {
     /**
      * Get repo name from process_repo.json
      * output: repoName.txt
+     *
      * @param dataFromPath
      */
     public void getReposNameFromRepoInfo(String dataFromPath, String dataStorePath) {
@@ -120,10 +125,198 @@ public class Crawl {
 
     }
 
-    public void getReleaseInfo(String repo, String dataStorePath) {
-        String baseURL = "curl https://api.github.com/" + repo + "/access_token=" + StaticResource.token;
-        System.out.println(baseURL);
+    /**
+     * Get release info
+     *
+     * @param dataFromPath
+     * @param dataStorePath
+     */
+    public void getReleaseInfo(String dataFromPath, String dataStorePath) {
 
+        try {
+            List<String> repos = FileUtils.readLines(new File(dataFromPath), "utf-8");
+
+            int gap = repos.size() / 5;
+            ExecutorService executorService = Executors.newCachedThreadPool();
+
+            for (int i = 0; i < 5; i++) {
+                int start = i * gap;
+                int end = (i + 1) * gap;
+
+                if (i == 4) {
+                    end = repos.size();
+                }
+
+//                System.out.println("start = " + start);
+//                System.out.println("end = " + end);
+
+                final List<String> temp = repos.subList(start, end);
+                final int index = i;
+                final String storePath = dataStorePath;
+                Runnable run = () -> {
+                    try {
+                        getSplitReleaseInfo(temp, storePath, index);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                };
+                executorService.execute(run);
+            }
+            executorService.shutdown();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Get part release info
+     *
+     * @param repos
+     * @param dataStorePath
+     * @param id
+     */
+    public void getSplitReleaseInfo(List<String> repos, String dataStorePath, int id) {
+        try {
+            for (String repo : repos) {
+                Tools.protectRateLimit(false, StaticResource.getToken(id));
+
+                String baseURL = "curl https://api.github.com/repos/" + repo + "/releases?access_token=" + StaticResource.getToken(id);
+                String cmd = baseURL + "&per_page=100";
+
+                Process p = Runtime.getRuntime().exec(cmd);
+                Tools.processMessage(p.getErrorStream(), true);
+
+                Tools.readAndWrite(p.getInputStream(), dataStorePath + "/release" + id + ".json", "onereleaseend");
+
+                p.waitFor();
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * release(0-4).json
+     */
+    public void processHalfResOfRelease() {
+        String releasePath = StaticResource.basePath + "/release/release";
+        String dataStorePath = StaticResource.basePath + "/release/release.json";
+        try {
+            int cnt = 0;
+            for (int i = 0; i < 5; i++) {
+                String data = FileUtils.readFileToString(new File(releasePath + i + ".json"), "utf-8");
+                String[] releases = data.split("onereleaseend");
+                for (String release : releases) {
+
+                    System.out.println(i + release);
+                    // && (
+                    if (release.contains("API rate limit exceeded for user") || release.contains("Moved Permanently") || release.contains("Not Found")) {
+                        continue;
+                    } else {
+                        JSONArray array = new JSONArray(release);
+                        if (array.length() == 0) {
+                            continue;
+                        } else {
+                            cnt++;
+                            FileUtils.write(new File(dataStorePath), array.toString(), "utf-8", true);
+                            FileUtils.write(new File(dataStorePath), "\n", "utf-8", true);
+                        }
+                    }
+                }
+            }
+            System.out.println(cnt);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param dataFromPath
+     * @param dataStorePath
+     */
+    public void processReleaseInfo(String dataFromPath, String dataStorePath) {
+        try {
+            String data = FileUtils.readFileToString(new File(dataFromPath), "utf-8");
+            String[] releases = data.split("onereleaseend");
+            System.out.println(releases.length);
+            int cnt = 0;
+            for (int i = 0; i < releases.length; i++) {
+                if (releases[i].contains("apk")) {
+                    cnt++;
+                }
+            }
+            System.out.println("Have apk=" + cnt);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param releasePath
+     */
+    public void countReleaseHaveApk(String releasePath) {
+        try {
+            int cnt = 0;
+            List<String> lines = FileUtils.readLines(new File(releasePath), "utf-8");
+            for (String line : lines) {
+                if (line.contains("apk")) {
+                    cnt++;
+                    FileUtils.write(new File(StaticResource.basePath + "release/apk.json"), line, "utf-8", true);
+                    FileUtils.write(new File(StaticResource.basePath + "release/apk.json"), "\n", "utf-8", true);
+                }
+            }
+            System.out.println(cnt);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * download apk by apk.json
+     *
+     * @param apkPath
+     */
+    public void getApkAndCodeDownloadUrl(String apkPath) {
+        try {
+            List<String> apks = FileUtils.readLines(new File(apkPath), "utf-8");
+            for (String apk : apks) {
+                JSONArray array = new JSONArray(apk);
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject jsonObject = array.getJSONObject(i);
+                    String zipURL = jsonObject.getString("zipball_url");
+
+                    JSONArray assets = jsonObject.getJSONArray("assets");
+                    String apkURL = null;
+                    for (int j = 0; j < assets.length(); j++) {
+                        apkURL = assets.getJSONObject(j).getString("browser_download_url");
+                        if (apkURL.endsWith(".apk")) {
+                            break;
+                        }
+                    }
+
+                    if (apkURL != null) {
+                        System.out.println(zipURL);
+                        System.out.println(apkURL);
+                    }
+                }
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param apkAndCodeFilePath
+     */
+    public void downloadApkAndCode(String apkAndCodeFilePath) {
+        try {
+            List<String> downloadUrls = FileUtils.readLines(new File(apkAndCodeFilePath), "utf-8");
+            for (int i = 0; i < downloadUrls.size(); i += 2) {
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
