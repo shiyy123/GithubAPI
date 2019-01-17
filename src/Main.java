@@ -1,3 +1,5 @@
+import java.io.File;
+
 public class Main {
 
     public static void getRepo() {
@@ -17,12 +19,12 @@ public class Main {
 
             nextMonth = startMonth + 1;
 
-            if(startMonth == 12) {
+            if (startMonth == 12) {
                 nextMonth = 1;
                 nextYear++;
             }
 
-            if(startYear == 2018 && startMonth == 12) {
+            if (startYear == 2018 && startMonth == 12) {
                 break;
             }
 
@@ -32,7 +34,7 @@ public class Main {
 
             crawl.getRepos("topic:android+language:java+created:" + gap, StaticResource.basePath + "repos/repos.json");
             startMonth++;
-            if(startMonth == 13) {
+            if (startMonth == 13) {
                 startYear++;
                 startMonth = 1;
             }
@@ -70,7 +72,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
+//        int idx = 0;
+//        if (args[0].equals("1")) {
+//            idx = 1;
+//        }
+//        Crawl crawl = new Crawl();
+//        crawl.downloadApkAndCode(StaticResource.basePath + "sourcecode/", idx);
+
         Crawl crawl = new Crawl();
-        crawl.downloadApkAndCode(StaticResource.basePath +  "sourcecode/source_apk.txt");
+        crawl.getNeedIssue();
     }
 }

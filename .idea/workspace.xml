@@ -8,15 +8,16 @@
   <component name="ChangeListManager">
     <list default="true" id="be37f725-05b7-4481-8540-0a545c1b0578" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/GithubAPI_jar/GithubAPI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GithubAPI_jar/GithubAPI.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GithubAPI/Crawl$StartEndTime.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GithubAPI/Crawl$StartEndTime.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GithubAPI/Crawl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GithubAPI/Crawl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GithubAPI/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GithubAPI/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GithubAPI/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GithubAPI/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GithubAPI/StaticResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GithubAPI/StaticResource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GithubAPI/Tools.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GithubAPI/Tools.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Crawl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Crawl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StaticResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StaticResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tools.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,25 +28,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Crawl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="311" column="34" selection-start-line="311" selection-start-column="16" selection-end-line="311" selection-end-column="34" />
+            <state relative-caret-position="362">
+              <caret line="818" column="43" selection-start-line="818" selection-start-column="43" selection-end-line="818" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#37200#37201#0" expanded="true" />
-                <element signature="e#37261#37262#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="797">
-              <caret line="73" column="72" selection-start-line="73" selection-start-column="72" selection-end-line="73" selection-end-column="72" />
+            <state relative-caret-position="354">
+              <caret line="82" column="20" lean-forward="true" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -53,20 +52,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Tools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="124" column="36" selection-start-line="124" selection-start-column="36" selection-end-line="124" selection-end-column="36" />
+            <state relative-caret-position="210">
+              <caret line="147" column="13" selection-start-line="147" selection-start-column="13" selection-end-line="147" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2533#2534#0" expanded="true" />
+                <element signature="e#2590#2591#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/StaticResource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="65" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -83,13 +75,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>stargazers_count</find>
-      <find>&quot;state&quot;</find>
-      <find>&quot;state&quot;: &quot;closed&quot;</find>
-      <find>&quot;state&quot;:</find>
-      <find>count</find>
       <find>&quot;message&quot;</find>
-      <find>---------------</find>
       <find>___</find>
       <find>here</find>
       <find>onepa</find>
@@ -108,6 +94,17 @@
       <find>FileUtils.write</find>
       <find>apk</find>
       <find>no apk</find>
+      <find>a0611d83dffae80fb4a5fd4da5ae0dc03315dce3</find>
+      <find>---</find>
+      <find>thread</find>
+      <find>---------------</find>
+      <find>https://api.github.com/repos/devgianlu/PretendYoureXyzzyAndroid/zipball/v2.6.9</find>
+      <find>https://codeload.github.com/fullalien/crazyE-android/legacy.zip/v0.4.1</find>
+      <find>timestamp</find>
+      <find>hsf1002__hewhether.json</find>
+      <find>received_events_url&quot;: &quot;https://api.github.com/users/manuelsc/received_events&quot;,</find>
+      <find>7cacaedb485eb082f814f3235aa72c65deea86c1</find>
+      <find>out</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -117,18 +114,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Repo.java" />
-        <option value="$PROJECT_DIR$/src/StaticResource.java" />
         <option value="$PROJECT_DIR$/src/Tools.java" />
-        <option value="$PROJECT_DIR$/src/Crawl.java" />
+        <option value="$PROJECT_DIR$/src/StaticResource.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/Crawl.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="663" />
+    <option name="x" value="51" />
     <option name="y" value="27" />
-    <option name="width" value="1257" />
-    <option name="height" value="651" />
+    <option name="width" value="935" />
+    <option name="height" value="1053" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -138,7 +135,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -155,14 +152,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545566814956" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547714393161" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../campusqa" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -186,7 +183,8 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="GithubAPI" />
-      <option name="VM_PARAMETERS" value="-Xms5120m -Xmx5120m -Xss512K -XX:PermSize=256m -XX:MaxPermSize=256m -XX:SurvivorRatio=4 -XX:-UseGCOverheadLimit" />
+      <option name="PROGRAM_PARAMETERS" value="0" />
+      <option name="VM_PARAMETERS" value="-Xms5120m -Xmx5120m -Xss512K -XX:SurvivorRatio=4 -XX:-UseGCOverheadLimit" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -226,18 +224,35 @@
       <workItem from="1545476140829" duration="7218000" />
       <workItem from="1545532364157" duration="5465000" />
       <workItem from="1545550285104" duration="3213000" />
-      <workItem from="1545559187054" duration="1759000" />
+      <workItem from="1545559187054" duration="7605000" />
+      <workItem from="1545577008576" duration="2877000" />
+      <workItem from="1545622374555" duration="3584000" />
+      <workItem from="1545632316517" duration="3386000" />
+      <workItem from="1545655770885" duration="10352000" />
+      <workItem from="1545704416957" duration="4374000" />
+      <workItem from="1546422123463" duration="19000" />
+      <workItem from="1546834854154" duration="71000" />
+      <workItem from="1547707146563" duration="7021000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150077000" />
+    <option name="totallyTimeSpent" value="187607000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="51" y="27" width="1869" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.07797913" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.34949267" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -246,16 +261,16 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4997236" weight="0.65103596" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4997236" visible="true" weight="0.4002181" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.49410504" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32937366" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3293348" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3304253" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.28789532" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5002764" side_tool="true" weight="0.42229366" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32897604" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32824427" />
       <window_info anchor="bottom" id="Duplicate detector" order="12" weight="0.32937366" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -313,17 +328,6 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/StaticResource.java</url>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="jar://$USER_HOME$/JAR/org.json.jar!/org/json/JSONObject.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -342,10 +346,52 @@
       </provider>
     </entry>
     <entry file="jar:///usr/lib/jdk/jdk1.8.0_161/src.zip!/java/lang/String.java" />
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/Process.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="707" column="12" selection-start-line="707" selection-start-column="12" selection-end-line="707" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/FileSystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="214" column="48" selection-start-line="214" selection-start-column="48" selection-end-line="214" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Commit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StaticResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+        <state relative-caret-position="289">
+          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -359,67 +405,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/Process.java">
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/StringBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Commit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
+        <state relative-caret-position="296">
+          <caret line="134" column="25" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/JAR/commons-io-2.6/commons-io-2.6.jar!/org/apache/commons/io/FileUtils.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="1182" column="23" selection-start-line="1182" selection-start-column="23" selection-end-line="1182" selection-end-column="23" />
+        <state relative-caret-position="133">
+          <caret line="522" column="23" selection-start-line="522" selection-start-column="23" selection-end-line="522" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/List.java">
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="707" column="12" selection-start-line="707" selection-start-column="12" selection-end-line="707" selection-end-column="12" />
+        <state relative-caret-position="314">
+          <caret line="666" lean-forward="true" selection-start-line="666" selection-end-line="666" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StaticResource.java">
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/System.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="65" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="65" />
+        <state relative-caret-position="174">
+          <caret line="109" column="36" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Tools.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="124" column="36" selection-start-line="124" selection-start-column="36" selection-end-line="124" selection-end-column="36" />
+        <state relative-caret-position="210">
+          <caret line="147" column="13" selection-start-line="147" selection-start-column="13" selection-end-line="147" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Crawl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="311" column="34" selection-start-line="311" selection-start-column="16" selection-end-line="311" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#37200#37201#0" expanded="true" />
-            <element signature="e#37261#37262#0" expanded="true" />
+            <element signature="e#2533#2534#0" expanded="true" />
+            <element signature="e#2590#2591#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="797">
-          <caret line="73" column="72" selection-start-line="73" selection-start-column="72" selection-end-line="73" selection-end-column="72" />
+        <state relative-caret-position="354">
+          <caret line="82" column="20" lean-forward="true" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Crawl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="818" column="43" selection-start-line="818" selection-start-column="43" selection-end-line="818" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
