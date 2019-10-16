@@ -8,8 +8,6 @@ public class Repo {
     int starCount;
     int forkCount;
     int watchCount;
-    Issue issue;
-    Commit commit;
     Repo() {
 
     }
