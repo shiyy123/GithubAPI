@@ -71,13 +71,12 @@ public class Main {
         crawl.getApkAndCodeDownloadUrl(StaticResource.basePath + "release/apk.json");
     }
 
+    public static void getCppRepo() {
+
+    }
+
+
     public static void main(String[] args) {
-//        int idx = 0;
-//        if (args[0].equals("1")) {
-//            idx = 1;
-//        }
-//        Crawl crawl = new Crawl();
-//        crawl.downloadApkAndCode(StaticResource.basePath + "sourcecode/", idx);
 
         Crawl crawl = new Crawl();
         crawl.getNeedIssue();

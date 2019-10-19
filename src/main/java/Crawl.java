@@ -1,9 +1,7 @@
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.omg.SendingContext.RunTime;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -21,8 +19,8 @@ public class Crawl {
      * @param cmd
      * @return
      */
-    private int getCnt(String cmd) {
-        Tools.protectRateLimit(false);
+    public static int getCnt(String cmd) {
+//        Tools.protectRateLimit(false);
 
         int cnt = 0;
         try {
@@ -32,6 +30,8 @@ public class Crawl {
 
             p.waitFor();
             p.destroyForcibly();
+
+            System.out.println(res.toString());
 
             JSONObject item = new JSONObject(res.toString());
             cnt = item.getInt("total_count");

@@ -7,23 +7,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be37f725-05b7-4481-8540-0a545c1b0578" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20190722.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.attach_pid24585" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.attach_pid7307" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_lingala_zip4j_zip4j_1_3_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_compress_1_19.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/BatchTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CrawlCpp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DecompressUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ProcessUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_6.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20190722.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20190722.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GithubAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GithubAPI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Commit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Crawl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Issue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StaticResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tools.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Crawl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Crawl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,40 +38,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>&quot;message&quot;</find>
-      <find>___</find>
-      <find>here</find>
-      <find>onepa</find>
-      <find>onepageend</find>
-      <find>get()</find>
-      <find>406b8b1cdc15f3cb1</find>
-      <find>protectRateLimit</find>
-      <find>406b8b1cdc15f3cb1757cdd7a3a170d3e11c8c0d</find>
-      <find>created:</find>
-      <find>resources</find>
-      <find>totalNum</find>
-      <find>Current</find>
-      <find>Lloyd0577/MVPDemo</find>
-      <find>^\n</find>
-      <find>true</find>
-      <find>FileUtils.write</find>
-      <find>apk</find>
-      <find>no apk</find>
-      <find>a0611d83dffae80fb4a5fd4da5ae0dc03315dce3</find>
-      <find>---</find>
-      <find>thread</find>
-      <find>---------------</find>
-      <find>https://api.github.com/repos/devgianlu/PretendYoureXyzzyAndroid/zipball/v2.6.9</find>
-      <find>https://codeload.github.com/fullalien/crazyE-android/legacy.zip/v0.4.1</find>
-      <find>timestamp</find>
-      <find>hsf1002__hewhether.json</find>
-      <find>received_events_url&quot;: &quot;https://api.github.com/users/manuelsc/received_events&quot;,</find>
-      <find>7cacaedb485eb082f814f3235aa72c65deea86c1</find>
-      <find>out</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -92,13 +58,18 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547714393161" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../campusqa" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.general" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -112,7 +83,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.BatchTest">
+    <configuration name="BatchTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BatchTest" />
+      <module name="GithubAPI" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CrawlCpp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CrawlCpp" />
+      <module name="GithubAPI" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="GithubAPI" />
@@ -124,6 +109,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BatchTest" />
+        <item itemvalue="Application.CrawlCpp" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -167,7 +154,12 @@
       <workItem from="1546834854154" duration="71000" />
       <workItem from="1547707146563" duration="7021000" />
       <workItem from="1571110219106" duration="2787000" />
-      <workItem from="1571230256242" duration="647000" />
+      <workItem from="1571230256242" duration="2987000" />
+      <workItem from="1571280658226" duration="9622000" />
+      <workItem from="1571295206130" duration="2878000" />
+      <workItem from="1571324207636" duration="1069000" />
+      <workItem from="1571367419131" duration="14526000" />
+      <workItem from="1571399038712" duration="11173000" />
     </task>
     <servers />
   </component>
