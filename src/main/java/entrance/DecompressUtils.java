@@ -1,3 +1,4 @@
+package entrance;
 
 import java.io.*;
 import java.util.zip.GZIPInputStream;
