@@ -44,8 +44,9 @@ public class BatchTest {
         }
     }
 
-    static void batchTest() {
-        String zipPath = "/mnt/share/dataset/";
+    static void batchTest(String zipPath, String baseWorkSpace) {
+//        String zipPath = "/mnt/share/dataset/";
+//        String zipPath = "/mnt/share/testcase/c++";
         File zipFolder = new File(zipPath);
         File[] compressFiles = zipFolder.listFiles();
         List<String> compressFilePathList = new ArrayList<>();
@@ -68,7 +69,7 @@ public class BatchTest {
 
             Runnable run = () -> {
                 try {
-                    singleTest(singleList);
+                    singleTest(singleList, baseWorkSpace);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -78,8 +79,7 @@ public class BatchTest {
 
     }
 
-    static void singleTest(List<String> compressFilePaths) {
-        String baseWorkSpace = "/mnt/share/workspace";
+    static void singleTest(List<String> compressFilePaths, String baseWorkSpace) {
 
         for (String compressFilePath : compressFilePaths) {
             File compressFile = new File(compressFilePath);
@@ -95,13 +95,15 @@ public class BatchTest {
                 e.printStackTrace();
             }
 
-            String cmd = "docker run --rm -v " + curWorkSpacePath + "/:/workspace mt_csc:latest start -F /workspace/" + compressFile.getName();
+            String cmd = "docker run --rm -v " + curWorkSpacePath + "/:/workspace mt_csc:latest start -D -F /workspace/" + compressFile.getName();
+            String outFilePath = curWorkSpacePath + File.separator + "out";
+            String errorFilePath = curWorkSpacePath + File.separator + "error";
             try {
                 Process process = Runtime.getRuntime().exec(cmd);
-                ProcessUtils.processMessageToNull(process.getErrorStream());
-                ProcessUtils.processMessageToNull(process.getInputStream());
-                process.waitFor(60, TimeUnit.MINUTES);
-            } catch (IOException | InterruptedException e) {
+                ProcessExecutor processExecutor = new ProcessExecutor(process, outFilePath, errorFilePath);
+                processExecutor.execute();
+
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -110,6 +112,8 @@ public class BatchTest {
     public static void main(String[] args) {
 //        tryDecompress();
 //        deleteUseless();
-        batchTest();
+        String zipPath = "/mnt/share/dataset/C_CPP";
+        String workPath = "/mnt/share/workspaceJuliet";
+        batchTest(zipPath, workPath);
     }
 }

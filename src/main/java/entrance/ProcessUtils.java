@@ -44,13 +44,34 @@ public class ProcessUtils {
     /**
      * Process the stream generated in process to String
      */
-    public static List<String> processMessageToString(InputStream inputStream) {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+    public static List<String> processMessageToStringMulti(InputStream inputStream) {
         List<String> lines = new ArrayList<>();
+        new Thread(() -> {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            try {
+                while ((line = bufferedReader.readLine()) != null) {
+                    lines.add(line);
+                    System.out.println(line);
+//                stringBuilder.append(line);
+//                stringBuilder.append(System.getProperty("line.separator"));
+                }
+                bufferedReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        return lines;
+    }
+
+    public static List<String> processMessageToStringSingle(InputStream inputStream) {
+        List<String> lines = new ArrayList<>();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         String line;
         try {
             while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);
+                System.out.println(line);
 //                stringBuilder.append(line);
 //                stringBuilder.append(System.getProperty("line.separator"));
             }

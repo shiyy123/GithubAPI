@@ -36,8 +36,8 @@ public class CrawlCpp {
 
         try {
             Process process = Runtime.getRuntime().exec(cmd);
-            List<String> inputList = ProcessUtils.processMessageToString(process.getInputStream());
-            List<String> errorList = ProcessUtils.processMessageToString(process.getErrorStream());
+            List<String> inputList = ProcessUtils.processMessageToStringSingle(process.getInputStream());
+            List<String> errorList = ProcessUtils.processMessageToStringSingle(process.getErrorStream());
 
             FileUtils.writeLines(storeFile, inputList, true);
             FileUtils.writeLines(logFile, errorList, true);
@@ -83,7 +83,7 @@ public class CrawlCpp {
             try {
                 Process process = Runtime.getRuntime().exec(cmd);
                 ProcessUtils.processMessageToNull(process.getInputStream());
-                List<String> stringList = ProcessUtils.processMessageToString(process.getErrorStream());
+                List<String> stringList = ProcessUtils.processMessageToStringSingle(process.getErrorStream());
                 stringList.forEach(System.out::println);
                 process.waitFor();
             } catch (IOException | InterruptedException e) {
