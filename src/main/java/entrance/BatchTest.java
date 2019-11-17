@@ -55,7 +55,7 @@ public class BatchTest {
         }
 
         ExecutorService executorService = Executors.newCachedThreadPool();
-        int threadSize = 4;
+        int threadSize = 6;
         int gap = compressFilePathList.size() / threadSize;
         for (int i = 0; i < threadSize; i++) {
             int start = i * gap;
@@ -112,7 +112,7 @@ public class BatchTest {
     public static void main(String[] args) {
 //        tryDecompress();
 //        deleteUseless();
-        String zipPath = "/mnt/share/dataset/C_CPP";
+        String zipPath = "/mnt/share/dataset/C_CPP_ZIP";
         String workPath = "/mnt/share/workspaceJuliet";
         batchTest(zipPath, workPath);
     }

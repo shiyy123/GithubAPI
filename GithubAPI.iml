@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/scala" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -38,6 +39,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="scala-sdk-2.12.10" level="application" />
     <orderEntry type="library" name="Maven: net.lingala.zip4j:zip4j:1.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.19" level="project" />
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.5.2" level="project" />
@@ -76,5 +78,47 @@
     <orderEntry type="library" name="Maven: com.aliyun:aliyun-java-sdk-ecs:4.2.0" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.9" level="project" />
+    <orderEntry type="library" name="Maven: com.github.pathikrit:better-files_2.12:3.8.0" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.12.8" level="project" />
+    <orderEntry type="library" name="Maven: org.scalatest:scalatest_2.10:3.1.0-RC2" level="project" />
+    <orderEntry type="library" name="Maven: org.scalatest:scalatest-compatible:3.1.0-RC2" level="project" />
+    <orderEntry type="library" name="Maven: org.scalactic:scalactic_2.10:3.1.0-RC2" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-reflect:2.10.7" level="project" />
+    <orderEntry type="library" name="Maven: io.shiftleft:codepropertygraph:0.9.106" level="project" />
+    <orderEntry type="library" name="Maven: io.shiftleft:tinkergraph-gremlin:3.3.4.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.tinkerpop:gremlin-core:3.3.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.tinkerpop:gremlin-shaded:3.3.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-configuration:commons-configuration:1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.15" level="project" />
+    <orderEntry type="library" name="Maven: org.javatuples:javatuples:1.2" level="project" />
+    <orderEntry type="library" name="Maven: com.carrotsearch:hppc:0.7.1" level="project" />
+    <orderEntry type="library" name="Maven: com.jcabi:jcabi-manifests:1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.jcabi:jcabi-log:0.14" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup:javapoet:1.8.0" level="project" />
+    <orderEntry type="library" name="Maven: net.objecthunter:exp4j:0.4.8" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.21" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.trove4j:core:3.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.ehcache:ehcache:3.7.0" level="project" />
+    <orderEntry type="library" name="Maven: org.msgpack:msgpack-core:0.8.16" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2-mvstore:1.4.199" level="project" />
+    <orderEntry type="library" name="Maven: com.michaelpollmeier:gremlin-scala_2.12:3.3.4.13" level="project" />
+    <orderEntry type="library" name="Maven: com.michaelpollmeier:macros_2.12:3.3.4.13" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-compiler:2.12.7" level="project" />
+    <orderEntry type="library" name="Maven: com.chuusai:shapeless_2.12:2.3.3" level="project" />
+    <orderEntry type="library" name="Maven: org.typelevel:macro-compat_2.12:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:21.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.11.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.11.0" level="project" />
+    <orderEntry type="library" name="Maven: io.shiftleft:semanticcpg:0.10.19" level="project" />
+    <orderEntry type="library" name="Maven: org.json4s:json4s-native_2.12:3.5.2" level="project" />
+    <orderEntry type="library" name="Maven: org.json4s:json4s-core_2.12:3.5.2" level="project" />
+    <orderEntry type="library" name="Maven: org.json4s:json4s-ast_2.12:3.5.2" level="project" />
+    <orderEntry type="library" name="Maven: org.json4s:json4s-scalap_2.12:3.5.2" level="project" />
+    <orderEntry type="library" name="Maven: com.thoughtworks.paranamer:paranamer:2.8" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang.modules:scala-xml_2.12:1.0.6" level="project" />
+    <orderEntry type="library" name="Maven: com.massisframework:j-text-utils:0.3.4" level="project" />
+    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
+    <orderEntry type="library" name="Maven: au.com.bytecode:opencsv:2.4" level="project" />
   </component>
 </module>

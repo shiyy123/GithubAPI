@@ -14,7 +14,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>entrance.BatchTest</mainClass>
+                            <mainClass>tool.CJoern</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -87,7 +87,25 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.pathikrit</groupId>
+            <artifactId>better-files_2.12</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.10</artifactId>
+            <version>3.1.0-RC2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.shiftleft</groupId>
+            <artifactId>codepropertygraph</artifactId>
+            <version>0.9.106</version>
+        </dependency>
+        <dependency>
+            <groupId>io.shiftleft</groupId>
+            <artifactId>semanticcpg</artifactId>
+            <version>0.10.19</version>
+        </dependency>
     </dependencies>
-
-
 </project>
