@@ -1,6 +1,10 @@
 package entrance;
 
 import org.apache.commons.io.FileUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -9,6 +13,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -21,20 +26,32 @@ class Func {
     int startLine;
     int endLine;
     boolean isVul;
-    int vulId;
+    HashSet<Integer> vulIdSet;
 
-    Func(String name, String path, int startLine, int endLine, boolean isVul, int vulId) {
+    /**
+     * @param name      函数名
+     * @param path      函数相对路径
+     * @param startLine 函数起始行
+     * @param endLine   函数终止行
+     * @param isVul     是否是漏洞函数
+     * @param vulIdSet  漏洞id的集合
+     */
+    Func(String name, String path, int startLine, int endLine, boolean isVul, HashSet<Integer> vulIdSet) {
         this.name = name;
         this.path = path;
         this.startLine = startLine;
         this.endLine = endLine;
         this.isVul = isVul;
-        this.vulId = vulId;
+        this.vulIdSet = vulIdSet;
     }
 
     @Override
     public String toString() {
-        return name + "\n" + path + "\n" + startLine + " " + endLine + "\n" + vulId + "\n" + isVul + "\n";
+        StringBuilder sb = new StringBuilder();
+        for (Integer i : vulIdSet) {
+            sb.append(i).append(" ");
+        }
+        return name + "\n" + path + "\n" + startLine + " " + endLine + "\n" + sb.toString() + "\n" + isVul + "\n";
     }
 }
 
@@ -47,8 +64,25 @@ public class CalcTNAndFP {
         return false;
     }
 
-    HashMap<Integer, List<Func>> loadFunc(String workSpacePath) {
-        HashMap<Integer, List<Func>> map = new HashMap<>();
+    HashSet<Integer> getVulIdSetFromName(String name) {
+        HashSet<Integer> set = new HashSet<>();
+        String[] ss = name.split("_");
+        for (String s : ss) {
+            if (!s.isEmpty() && s.startsWith("CWE")) {
+                set.add(Integer.parseInt(s.substring(3)));
+            }
+        }
+        return set;
+    }
+
+    /**
+     * 以folder为索引，包含每个folder下的所有函数，
+     *
+     * @param workSpacePath
+     * @return
+     */
+    HashMap<String, List<Func>> loadFunc(String workSpacePath) {
+        HashMap<String, List<Func>> map = new HashMap<>();
 
         File[] folders = new File(workSpacePath).listFiles();
         assert folders != null;
@@ -56,7 +90,7 @@ public class CalcTNAndFP {
             List<Func> funcList = new ArrayList<>();
 
             String cweName = folder.getName();
-            int vulId = Integer.parseInt(cweName.split("_")[0].substring(3));
+//            int vulId = Integer.parseInt(cweName.split("_")[0].substring(3));
 
             String decompressPath = folder.getAbsolutePath() + File.separator + "decompress";
             String funcPath = decompressPath + File.separator + "funcs";
@@ -78,14 +112,15 @@ public class CalcTNAndFP {
                         int startLine = Integer.parseInt(lines[i + 1].substring(lines[i + 1].indexOf('(') + 1, lines[i + 1].indexOf(')')));
                         int endLine = Integer.parseInt(lines[i + 2].substring(lines[i + 2].indexOf('(') + 1, lines[i + 2].indexOf(')')));
 
-                        Func func = new Func(name, path, startLine, endLine, isVulnerability(name), vulId);
+                        HashSet<Integer> set = getVulIdSetFromName(name);
+                        Func func = new Func(name, path, startLine, endLine, isVulnerability(name), set);
                         funcList.add(func);
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            map.put(vulId, funcList);
+            map.put(cweName, funcList);
         }
         return map;
     }
@@ -102,15 +137,10 @@ public class CalcTNAndFP {
     }
 
     // TP,FP,TN,FN
-    boolean calc(String workSpacePath) {
+    boolean calcJuliet(String workSpacePath) {
         boolean result = true;
 
-        HashMap<Integer, List<Func>> map = loadFunc(workSpacePath);
-
-//        map.forEach((k, v) -> {
-//            System.out.println(k);
-//            System.out.println(v);
-//        });
+        HashMap<String, List<Func>> map = loadFunc(workSpacePath);
 
         File[] folders = new File(workSpacePath).listFiles();
         assert folders != null;
@@ -158,10 +188,141 @@ public class CalcTNAndFP {
         return result;
     }
 
+    boolean calcCppCheck(String workSpacePath) {
+        boolean result = true;
+
+        String experimentPath = "G:\\share\\experiment\\data.txt";
+        File experimentFile = new File(experimentPath);
+        if (experimentFile.exists()) {
+            experimentFile.delete();
+        }
+
+        HashMap<String, List<Func>> map = loadFunc(workSpacePath);
+
+        File[] folders = new File(workSpacePath).listFiles();
+        assert folders != null;
+        try {
+            for (File folder : folders) {
+                String folderName = folder.getName();
+//                if (!folderName.equals("CWE476_NULL_Pointer_Dereference")) {
+//                    continue;
+//                }
+
+                // 漏洞函数代表的漏洞id
+                HashSet<Integer> vulIdSet = getVulIdSetFromName(folderName);
+                System.out.println(folderName);
+
+//                int folderVid = Integer.parseInt(folderName.split("_")[0].substring(3));
+                int trueVul = 0;
+                int falseVul = 0;
+
+                String decompressPath = folder.getAbsolutePath() + File.separator + "decompress";
+                File cppCheck = new File(decompressPath + File.separator + "cppcheck.xml");
+
+                SAXReader saxReader = new SAXReader();
+                Document document = saxReader.read(cppCheck);
+                Element root = document.getRootElement().element("errors");
+
+                List<Element> elements = root.elements("error");
+
+                List<Func> funcList = map.getOrDefault(folderName, new ArrayList<>());
+                List<Boolean> used = new ArrayList<>();
+                for (int i = 0; i < funcList.size(); i++) {
+                    used.add(false);
+                }
+
+                for (Element element : elements) {
+                    int scanVulId;
+                    if (element.attributeValue("id").equals("arrayIndexOutOfBounds")) {
+                        scanVulId = 129;
+                    } else if (element.attributeValue("id").equals("bufferAccessOutOfBounds")) {
+                        scanVulId = 805;
+                    } else {
+                        scanVulId = Integer.parseInt(element.attributeValue("cwe"));
+                    }
+
+                    List<Element> elementList = element.elements("location");
+
+                    for (Element element1 : elementList) {
+                        String[] tmp = element1.attributeValue("file").split("/");
+                        String scanPath = tmp[tmp.length - 2] + "/" + tmp[tmp.length - 1];
+                        int scanLineNum = Integer.parseInt(element1.attributeValue("line"));
+
+                        boolean found = false;
+                        Func scanVulFunc = null;
+                        for (int i = 0; i < funcList.size(); i++) {
+                            Func func = funcList.get(i);
+                            if (scanPath.equals(func.path) && (scanLineNum >= func.startLine && scanLineNum <= func.endLine)) {
+                                scanVulFunc = func;
+                                if (vulIdSet.contains(scanVulId)) {
+                                    used.set(i, true);
+                                    found = true;
+                                    trueVul++;
+                                    break;
+                                }
+                            }
+                        }
+
+                        assert scanVulFunc != null;
+                        // 误报 1
+                        if (!found) {
+                            FileUtils.write(experimentFile, scanPath + "\t" + scanVulFunc.name + "\t" + scanVulFunc.startLine + "\t" + scanVulFunc.endLine + "\t" + 1, StandardCharsets.UTF_8, true);
+                            FileUtils.write(experimentFile, "\n", StandardCharsets.UTF_8, true);
+                            falseVul++;
+                        } else {//正报 0
+                            FileUtils.write(experimentFile, scanPath + "\t" + scanVulFunc.name + "\t" + scanVulFunc.startLine + "\t" + scanVulFunc.endLine + "\t" + 0, StandardCharsets.UTF_8, true);
+                            FileUtils.write(experimentFile, "\n", StandardCharsets.UTF_8, true);
+                        }
+                    }
+                }
+
+                // 漏报
+                for (int i = 0; i < funcList.size(); i++) {
+                    if (!used.get(i)) {
+                        Func func = funcList.get(i);
+                        if (func.isVul) {
+                            FileUtils.write(experimentFile, func.path + "\t" + func.name + "\t" + func.startLine + "\t" + func.endLine + "\t" + 2, StandardCharsets.UTF_8, true);
+                            FileUtils.write(experimentFile, "\n", StandardCharsets.UTF_8, true);
+                        }
+                    }
+                }
+
+                int totalVul = 0;
+                for (Func func : map.get(folderName)) {
+                    if (func.isVul) {
+                        totalVul++;
+                    }
+                }
+                System.out.println(totalVul);
+                System.out.println(trueVul);
+                System.out.println(falseVul);
+            }
+        } catch (DocumentException e) {
+            result = false;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    int countUnique(String path) {
+        HashSet<String> set = new HashSet<>();
+        try {
+            List<String> stringList = FileUtils.readLines(new File(path), StandardCharsets.UTF_8);
+            set.addAll(stringList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(set.size());
+        return set.size();
+    }
+
     public static void main(String[] args) {
         CalcTNAndFP calcTNAndFP = new CalcTNAndFP();
         String workSpacePath = "G:\\share\\workspaceJuliet";
 
-        calcTNAndFP.calc(workSpacePath);
+        calcTNAndFP.calcCppCheck(workSpacePath);
+//        calcTNAndFP.countUnique("G:\\share\\experiment\\data_CWE476.txt");
     }
 }

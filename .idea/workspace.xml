@@ -7,18 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be37f725-05b7-4481-8540-0a545c1b0578" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/entrance/CalcTNAndFP.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/entrance/CopyResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tool/CJoern.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tool/DataCleaner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tool/FileGroup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/scala/StructureTests.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entrance/GenerateWord2vec.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tool/CppCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GithubAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GithubAPI.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProcessExecutor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entrance/BatchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entrance/BatchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entrance/CalcTNAndFP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entrance/CalcTNAndFP.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +95,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CalcTNAndFP">
+  <component name="RunManager" selected="Application.GenerateWord2vec">
     <configuration name="CalcTNAndFP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="entrance.CalcTNAndFP" />
       <module name="GithubAPI" />
@@ -115,12 +109,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CopyResult" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="entrance.CopyResult" />
+    <configuration name="CppCheck" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tool.CppCheck" />
       <module name="GithubAPI" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="entrance.*" />
+          <option name="PATTERN" value="tool.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -141,6 +135,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GenerateWord2vec" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="entrance.GenerateWord2vec" />
+      <module name="GithubAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="entrance.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Joern" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Joern" />
       <module name="GithubAPI" />
@@ -148,20 +155,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Test" />
-      <module name="GithubAPI" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GenerateWord2vec" />
         <item itemvalue="Application.CalcTNAndFP" />
+        <item itemvalue="Application.CppCheck" />
         <item itemvalue="Application.DataCleaner" />
         <item itemvalue="Application.Joern" />
-        <item itemvalue="Application.Test" />
-        <item itemvalue="Application.CopyResult" />
       </list>
     </recent_temporary>
   </component>
@@ -246,7 +246,12 @@
       <workItem from="1573742742750" duration="2393000" />
       <workItem from="1573783331860" duration="15894000" />
       <workItem from="1573818408639" duration="5966000" />
-      <workItem from="1573957996327" duration="12044000" />
+      <workItem from="1573957996327" duration="14932000" />
+      <workItem from="1574047767787" duration="21862000" />
+      <workItem from="1574134046141" duration="6434000" />
+      <workItem from="1574316991596" duration="488000" />
+      <workItem from="1574325897661" duration="7282000" />
+      <workItem from="1574400242774" duration="591000" />
     </task>
     <servers />
   </component>

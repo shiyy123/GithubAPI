@@ -14,7 +14,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>tool.CJoern</mainClass>
+                            <mainClass>tool.CppCheck</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
